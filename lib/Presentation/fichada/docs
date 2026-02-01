@@ -1,0 +1,20 @@
+[Fichada Face]
+Tiene Codigo Empleado
+- Verifica con la api de reconocimiento facial si es la persona 
+No tiene Codigo Empleado
+- Marca el codigo que devuelva el reconocimiento
+No tiene Codigo sucursal
+- Puede marcar en cualquier Sucursal (valida gps)
+Tiene Codigo Sucursal
+- Solo pueden marcar en esa sucursal (valida gps)
+- Si falla el gps puede ir a Fichada Manual
+
+[Fichada Manual]
+Tiene Codigo Empleado
+- Se selcciona automaticamente el empleado
+No tiene Codigo Empleado
+- Puede digitar el codigo de empleado
+Tiene Codigo Sucursal o No tiene CSucursal
+- Ignora la validacion por gps
+Foto
+- Puede sacar foto para validar la fichada manual
