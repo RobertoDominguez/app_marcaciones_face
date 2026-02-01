@@ -9,7 +9,10 @@ curl -fsSL https://fvm.app/install.sh | bash
 
 
 ## For bash (add to ~/.bashrc):
+nano ~/.bashrc
+
 export PATH="/root/fvm/bin:$PATH"
+
 
 ## Then restart your shell or run:
 source ~/.bashrc 
