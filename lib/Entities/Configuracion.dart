@@ -7,4 +7,6 @@ class Configuracion{
   String nombresPersona='';
   String apellidosPersona='';
   String dbBiometrico='';
+
+  bool configurando = false; // cuando el usuario entra a configurar (gestionar biometria)
 }

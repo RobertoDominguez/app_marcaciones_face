@@ -37,11 +37,11 @@ class __SideNavState extends State<SideNav>{
 
             cardRouteLeading(context, Icons.home, 'Menu', () { Navigator.pushReplacementNamed(context, menuRoute ); } ),
 
-            cardRouteLeading(context,Icons.tag_faces_rounded, 'Gestionar Biometria', () { Navigator.pushNamed(context, facesRoute ); } ),
+            cardRouteLeading(context,Icons.tag_faces_rounded, 'Gestionar Biometria', () { Navigator.pushNamed(context, authBiometricoRoute ); } ),
 
             cardRouteLeading(context,Icons.settings, 'Configuración', () { Navigator.pushReplacementNamed(context, configurarRoute ); } ),
 
-            cardRouteLeading(context,Icons.book, 'Info', () { Navigator.pushReplacementNamed(context, configurarRoute ); } ),
+            // cardRouteLeading(context,Icons.book, 'Info', () { Navigator.pushReplacementNamed(context, configurarRoute ); } ),
 
           ],
         ),

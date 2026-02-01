@@ -20,8 +20,12 @@ class BiometricoBusiness{
   }
 
   Future<DataResponse> recognize(List<ImageData> images) async{
-    print('recognize Business');
     DataResponse response = await biometricoData.recognize(apiKeyBiometrico, ConfiguracionSession.configuracion.dbBiometrico,images);
+    return response;
+  }
+
+  Future<DataResponse> delete(String code) async{
+    DataResponse response = await biometricoData.delete(apiKeyBiometrico, ConfiguracionSession.configuracion.dbBiometrico,code);
     return response;
   }
 

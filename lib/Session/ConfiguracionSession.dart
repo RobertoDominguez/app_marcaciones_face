@@ -46,4 +46,13 @@ class ConfiguracionSession{
 
     ConfiguracionSession.configuracion = configuracionP;
   }
+
+
+  static Future<void> abrirBiometrico()async{
+    configuracion.configurando = true;
+  }
+
+  static Future<void> cerrarBiometrico()async{
+    configuracion.configurando = false;
+  }
 }

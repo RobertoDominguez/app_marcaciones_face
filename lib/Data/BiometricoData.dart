@@ -234,118 +234,45 @@ class BiometricoData {
     return dataResponse;
   }
 
+
+
+
+
+
+
+
+  Future<DataResponse> delete(String apiKey, String db,String code) async {
+    DataResponse dataResponse = DataResponse();
+    try {
+      var url = Uri.parse('$hostBiometrico/faces/$code?db=$db');
+      final http.Response response = await http.delete(
+        url,
+        headers: {'Accept': 'application/json', 'apiKey': apiKey},
+      );
+
+
+      if (kDebugMode) {
+        print(response.body);
+      }
+      const JsonDecoder decoder = JsonDecoder();
+      var item = decoder.convert(response.body);
+
+      dataResponse.message = 'Error al eliminar codigo';
+      if (response.statusCode == 200) {
+
+        dataResponse.data = code;
+        dataResponse.status = true;
+        dataResponse.message = 'Codigo $code eliminado correctamente';
+      }
+      
+    } catch (error) {
+      if (kDebugMode) {
+        print(error.toString());
+      }
+      dataResponse.message = error.toString();
+    }
+    return dataResponse;
+  }
+
+
 }
-
-  // Future<DataResponse> store(String token,Fichada fichada,String host) async{
-  //   DataResponse dataResponse=new DataResponse();
-  //   try {
-
-  //     var url = Uri.parse(host+'/api/fichadas/fichada');
-  //     var request = http.MultipartRequest("POST",url);
-  //     request.headers['Accept']='application/json';
-  //     request.headers['appToken']=token;
-  //     fichada.toMapStore().forEach((key, value) {
-  //       request.fields[key]=value;
-  //     });
-
-
-  //     if (fichada.foto!=null){
-
-  //       if (!kIsWeb && fichada.foto!='') {
-  //         bool existeFoto=await File(fichada.foto).exists();
-  //         if ( existeFoto){
-  //           var status = await Permission.storage.status;
-  //           if (!status.isGranted) {
-  //             await Permission.storage.request();
-  //           }
-  //           File fotoFile=new File(fichada.foto);
-  //           http.ByteStream streamfoto = new http.ByteStream(DelegatingStream.typed(fotoFile.openRead()));
-  //           int lengthfoto = await fotoFile.length();
-  //           var multipartFilefoto = new http.MultipartFile('foto', streamfoto, lengthfoto,filename: basename(fotoFile.path));
-  //           request.files.add(multipartFilefoto);
-  //         }
-
-  //       }
-
-  //     }
-
-
-  //     if (fichada.foto2!=null){
-
-  //       if (!kIsWeb && fichada.foto2!='') {
-  //         bool existeFoto=await File(fichada.foto2).exists();
-  //         if ( existeFoto){
-  //           var status = await Permission.storage.status;
-  //           if (!status.isGranted) {
-  //             await Permission.storage.request();
-  //           }
-  //           File fotoFile2=new File(fichada.foto2);
-  //           http.ByteStream streamfoto2 = new http.ByteStream(DelegatingStream.typed(fotoFile2.openRead()));
-  //           int lengthfoto2 = await fotoFile2.length();
-  //           var multipartFilefoto2 = new http.MultipartFile('foto2', streamfoto2, lengthfoto2,filename: basename(fotoFile2.path));
-  //           request.files.add(multipartFilefoto2);
-  //         }
-
-  //       }
-
-  //     }
-
-  //     if (fichada.foto3!=null){
-
-  //       if (!kIsWeb && fichada.foto3!='') {
-  //         bool existeFoto=await File(fichada.foto3).exists();
-  //         if ( existeFoto){
-  //           var status = await Permission.storage.status;
-  //           if (!status.isGranted) {
-  //             await Permission.storage.request();
-  //           }
-  //           File fotoFile3=new File(fichada.foto3);
-  //           http.ByteStream streamfoto3 = new http.ByteStream(DelegatingStream.typed(fotoFile3.openRead()));
-  //           int lengthfoto3 = await fotoFile3.length();
-  //           var multipartFilefoto3 = new http.MultipartFile('foto3', streamfoto3, lengthfoto3,filename: basename(fotoFile3.path));
-  //           request.files.add(multipartFilefoto3);
-  //         }
-
-  //       }
-
-  //     }
-
-
-  //     var response = await request.send();
-  //     var responseData = await response.stream.toBytes();
-  //     var result = String.fromCharCodes(responseData);
-
-  //     if (kDebugMode) {
-  //       print(result);
-  //     }
-  //     const JsonDecoder decoder = const JsonDecoder();
-  //     var item = decoder.convert(result);
-  //     if (response.statusCode == 200) {
-
-  //       var element=item['data'];
-
-  //       Fichada fichada=new Fichada();
-  //       fichada.id=element['id'].toString();
-  //       fichada.codigo=element['codigo'].toString();
-  //       fichada.fecha=element['fecha'].toString();
-  //       fichada.hostname=element['hostname'].toString();
-  //       fichada.ip=element['ip'].toString();
-
-
-  //       dataResponse.data=fichada;
-  //       dataResponse.status=true;
-  //     }
-  //     dataResponse.message=item['message'];
-  //   }catch(error){
-  //     if (kDebugMode) {
-  //       print(error.toString());
-  //     }
-  //     dataResponse.message=error.toString();
-  //   }
-  //   return dataResponse;
-  // }
-
-
-// }
-
-

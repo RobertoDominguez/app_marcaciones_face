@@ -134,28 +134,29 @@ class _VerificacionBiometricaState extends State<VerificacionBiometrica> {
 
               Expanded(
                 child: !_initialized
-                    ? Center(child: CircularProgressIndicator())
-                    : Expanded(
-                        child: !_initialized
-                            ? Center(child: CircularProgressIndicator())
-                            : Stack(
-                                children: [
-                                  CameraPreview(_controller!),
+                    ? const Center(child: CircularProgressIndicator())
+                    : Center(
+                        child: AspectRatio(
+                          aspectRatio: _controller!.value.aspectRatio,
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              CameraPreview(_controller!),
 
-                                  Positioned(
-                                    top: 15,
-                                    right: 15,
-                                    child: FloatingActionButton(
-                                      mini: true,
-                                      backgroundColor: Colors.black54,
-                                      onPressed: _switchCamera,
-                                      child: Icon(Icons.cameraswitch),
-                                    ),
-                                  ),
-                                ],
+                              Positioned(
+                                top: 15,
+                                right: 15,
+                                child: FloatingActionButton(
+                                  mini: true,
+                                  backgroundColor: Colors.black54,
+                                  onPressed: _switchCamera,
+                                  child: const Icon(Icons.cameraswitch),
+                                ),
                               ),
+                            ],
+                          ),
+                        ),
                       ),
-
               ),
 
               SizedBox(height: 10),

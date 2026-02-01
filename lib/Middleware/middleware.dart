@@ -1,3 +1,5 @@
+import 'package:app_marcaciones_face/Presentation/biometrico/auth_biometrico.dart';
+import 'package:app_marcaciones_face/Presentation/biometrico/faces.dart';
 import 'package:flutter/material.dart';
 import '../Presentation/Configuracion/configurar.dart';
 import '../Presentation/menu.dart';
@@ -12,6 +14,14 @@ bool guest(){
   return ConfiguracionSession.configuracion.servidor=='';
 }
 
+bool authBiometrico(){
+  return ConfiguracionSession.configuracion.configurando;
+}
+
+bool guestBiometrico(){
+  return !ConfiguracionSession.configuracion.configurando;
+}
+
 Future<void> loadMiddleware()async{
   await ConfiguracionSession.getSession();
 }
@@ -20,6 +30,11 @@ Route middleware({required List<String> guards, required Widget builder, require
 
   bool authenticated=true;
   String stopIn='';
+
+  //pone en no configurando biometrico si es que es cualquier ruta no relacionada con biometrico
+  if (!guards.contains('biometrico') && !guards.contains('guestBiometrico')){
+    ConfiguracionSession.cerrarBiometrico();
+  }
 
   guards.forEach((guard) {
     if (authenticated){
@@ -32,6 +47,17 @@ Route middleware({required List<String> guards, required Widget builder, require
       if (guard=='guest'){
         authenticated=guest();
       }
+
+      //BIOMETRICO
+      if (guard=='biometrico'){
+        authenticated=authBiometrico();
+      }
+
+      //GUEST BIOMETRICO
+      if (guard=='guestBiometrico'){
+        authenticated=guestBiometrico();
+      }
+
       //OTHER
     }
 
@@ -50,6 +76,19 @@ Route middleware({required List<String> guards, required Widget builder, require
     RouteSettings routeSettings=RouteSettings(name: configurarRoute,arguments: settings.arguments);
     return MaterialPageRoute(settings: routeSettings, builder: (context) => const Configurar());
   }
+
+  //REDIRECT IF AUTHENTICATED
+  if (stopIn=='guestBiometrico' && !authenticated){
+    RouteSettings routeSettings=RouteSettings(name: facesRoute,arguments: settings.arguments);
+    return MaterialPageRoute(settings: routeSettings, builder: (context) => const FacesIndex());
+  }
+
+  //AUTHENTICATE
+  if (stopIn=='biometrico' && !authenticated){
+    RouteSettings routeSettings=RouteSettings(name: authBiometricoRoute,arguments: settings.arguments);
+    return MaterialPageRoute(settings: routeSettings, builder: (context) => const AuthBiometrico());
+  }
+
   //CONTINUE
   return MaterialPageRoute(settings: settings, builder: (context) => builder);
 }

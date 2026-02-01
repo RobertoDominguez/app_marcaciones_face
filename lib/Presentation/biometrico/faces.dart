@@ -135,7 +135,7 @@ class __FacesIndexState extends State<FacesIndex>{
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.credit_card,color: Colors.blue,size: 25,),
+                          Icon(Icons.credit_card,color: Style().uiColor(),size: 25,),
                           SizedBox(width: 20,),
                           Text(codigo,style: TextStyle(fontWeight: FontWeight.normal,fontSize: 20),)
                         ],
@@ -143,7 +143,7 @@ class __FacesIndexState extends State<FacesIndex>{
                       SizedBox(height: 5,),
                       Row(
                         children: [
-                          Icon(Icons.account_circle,color: Colors.blue,size: 25,),
+                          Icon(Icons.account_circle,color: Style().uiColor() ,size: 25,),
                           SizedBox(width: 20,),
                           SizedBox(
                             height: 20,
@@ -161,12 +161,57 @@ class __FacesIndexState extends State<FacesIndex>{
                   ),
                 )
               ), 
-              Icon(Icons.arrow_forward_ios,size: 40,)
+              IconButton(onPressed: (){
+                  deleteCode(codigo);
+                },
+                icon: Icon(Icons.delete,size: 40, color: Style().dangerColor(),)
+              )
+              
             ],
           )
         ),
       ),
     );
+  }
+
+
+
+
+  /// ==========================
+  /// ELIMINAR PERSONA
+  /// ==========================
+  Future<void> deleteCode(String code) async {
+
+    showAlertDialogOptions(context,'Eliminar Biometria','¿Desea eliminar el registro: $code ?',()async{
+      try {
+          showLoadingIndicator(context, 'Eliminando registro biometrico...');
+
+          DataResponse dataResponse = await biometricoBusiness.delete(code);
+
+          hideOpenDialog(context);
+
+          if (dataResponse.status) {
+            showAlertDialogContinue(
+              context,
+              "Eliminado con exito!",
+              dataResponse.message,
+              () {
+                Navigator.pushReplacementNamed(context, facesRoute);
+              },
+            );
+          } else {
+            showAlertDialog(
+              context,
+              "Error al eliminar Registro biometrico",
+              dataResponse.message,
+            );
+          }
+        } catch (e) {
+          hideOpenDialog(context);
+          showAlertDialogMessage(context, 'Error', e.toString());
+        }
+    });
+    
   }
 
 

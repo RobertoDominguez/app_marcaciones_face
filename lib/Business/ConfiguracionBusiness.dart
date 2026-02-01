@@ -18,4 +18,13 @@ class ConfiguracionBusiness{
     return response;
   }
 
+  Future<DataResponse> configurarBiometrico(String host, String codigoSucursal, String codigoPersona, String usuario, String clave) async{
+    DataResponse response=await configuracionData.configurar(apiKey, host,codigoSucursal,codigoPersona,usuario,clave);
+    if (response.status){
+      response.message = 'Credenciales validas';
+      await ConfiguracionSession.abrirBiometrico();
+    }
+    return response;
+  }
+
 }

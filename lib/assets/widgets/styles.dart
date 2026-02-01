@@ -59,6 +59,17 @@ class Style{
   }
 
   Color uiColor(){
+    Color color=Color.fromARGB(164, 128, 149, 240);
+    switch(style) {
+      case '1': {
+        color=const Color.fromARGB(164, 128, 149, 240);
+      }
+      break;
+    }
+    return color;
+  }
+
+  Color dangerColor(){
     Color color=Colors.red;
     switch(style) {
       case '1': {

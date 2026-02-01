@@ -111,7 +111,7 @@ class __AuthBiometricoState extends State<AuthBiometrico>{
                 SizedBox(height: 20.0),
                 CustomInputField( Icon(Icons.lock, color: Colors.white), "Clave", controllerClave, true),
                 SizedBox(height: 40.0),
-                buttonSeccondary(context, "GUARDAR", authBiometrico),
+                buttonSeccondary(context, "Iniciar Sesion", authBiometrico),
               ],
             ),
           )
@@ -121,12 +121,12 @@ class __AuthBiometricoState extends State<AuthBiometrico>{
   Future<void> authBiometrico() async{
     showLoadingIndicator(context,'Conectando con el servidor');
 
-    DataResponse dataResponse=await configuracionBusiness.configurar(servidor,codigoSucursal,codigoPersona,usuario,clave);
+    DataResponse dataResponse=await configuracionBusiness.configurarBiometrico(servidor,codigoSucursal,codigoPersona,usuario,clave);
 
     setState(() {
       hideOpenDialog(context);
       if (dataResponse.status){
-        showAlertDialogContinue(context, "Autentificado correctamente ", dataResponse.message,(){ Navigator.pushReplacementNamed(context,menuRoute); });
+       Navigator.pushReplacementNamed(context,facesRoute); 
       }else{
         showAlertDialog(context, "Error al autentificar usuario.", dataResponse.message);
       }
