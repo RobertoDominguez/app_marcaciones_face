@@ -80,7 +80,7 @@ class __AuthBiometricoState extends State<AuthBiometrico>{
     }
     return Scaffold(
       backgroundColor: Style().backgroundColor(),
-      appBar: headerAppBar(context,titulo(context, "AUTENTIFICACIÓN      ")),
+      appBar: headerAppBarBack(context,titulo(context, "AUTENTIFICACIÓN      ")),
       drawer: SideNav(),
       body: SafeArea(
         child: SizedBox.expand(
