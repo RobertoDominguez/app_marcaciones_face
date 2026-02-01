@@ -179,7 +179,7 @@ class _RegistroBiometricoState extends State<RegistroBiometrico> {
 
         if (response.status) {
           showAlertDialogContinue(context, "Éxito", "Biometría registrada correctamente", () {
-            Navigator.pop(context);
+            Navigator.pop(context,true);
           });
         } else {
           showAlertDialog(context, "Error", response.message);

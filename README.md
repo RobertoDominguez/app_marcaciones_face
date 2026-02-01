@@ -20,7 +20,7 @@ source ~/.bashrc
 - fvm list
 - fvm install <version>
 - fvm global <version>
-- fvm flutter build web --base-href /app_marcaciones_face/build/web/
+- fvm flutter build web --base-href /app_marcaciones_face/build/web/ --pwa-strategy=none
 
 
 ## .htaccess

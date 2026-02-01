@@ -43,8 +43,8 @@ class RouteGenerator{
         return middleware(guards: ['auth','authBiometrico'], builder: const RegistroBiometrico(), settings: settings);
 
       default:
-        // return MaterialPageRoute(settings: settings, builder: (context) => const Menu());
-        return MaterialPageRoute(settings: settings, builder: (context) => const Error404());
+        RouteSettings routeSettings=RouteSettings(name: menuRoute,arguments: settings.arguments);
+        return MaterialPageRoute(settings: routeSettings, builder: (context) => const Menu());
     }
   }
 

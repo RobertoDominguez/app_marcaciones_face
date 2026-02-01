@@ -43,8 +43,11 @@ class __FacesIndexState extends State<FacesIndex>{
           child: todo(context)
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, registrarFaceRoute);
+        onPressed: () async {
+          final result = await Navigator.pushNamed(context, registrarFaceRoute);
+          if (result == true) {
+            loadFaces(context);
+          }
         },
         foregroundColor: Style().textColorPrimary(),
         backgroundColor: Style().seccondaryColor(),
@@ -99,7 +102,7 @@ class __FacesIndexState extends State<FacesIndex>{
     }
 
     setState(() {
-      listaDeCards=List.generate(0, (index) =>SizedBox(height: 1,));
+      listaDeCards = [];
       listaDeCodigosSearch.forEach((item) {
         var c = cardFace(context,item);
         listaDeCards.add(c);
