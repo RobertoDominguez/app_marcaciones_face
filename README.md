@@ -11,11 +11,15 @@ curl -fsSL https://fvm.app/install.sh | bash
 # For bash (add to ~/.bashrc):
 export PATH="/root/fvm/bin:$PATH"
 
-# For zsh (add to ~/.zshrc):
-export PATH="/root/fvm/bin:$PATH"
-
-# For fish (run once):
-fish_add_path "/root/fvm/bin"
-
 # Then restart your shell or run:
-  source ~/.bashrc  # or ~/.zshrc
+source ~/.bashrc 
+
+- fvm list
+- fvm install <version>
+- fvm global <version>
+- fvm flutter build web --base-href /app_marcaciones_face/build/web/
+
+
+# .htaccess
+RewriteEngine On
+RewriteRule ^$ /app/build/index.html [L]
