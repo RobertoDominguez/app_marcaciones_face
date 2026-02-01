@@ -4,9 +4,18 @@ Flutter version
 3.38.7
 
 
-# Add the FVM APT repository
-echo "deb [trusted=yes] https://apt.fvm.app stable main" | sudo tee /etc/apt/sources.list.d/fvm.list
+# Install fvm
+curl -fsSL https://fvm.app/install.sh | bash
 
-# Update and install FVM
-sudo apt update
-sudo apt install fvm
+
+# For bash (add to ~/.bashrc):
+export PATH="/root/fvm/bin:$PATH"
+
+# For zsh (add to ~/.zshrc):
+export PATH="/root/fvm/bin:$PATH"
+
+# For fish (run once):
+fish_add_path "/root/fvm/bin"
+
+# Then restart your shell or run:
+  source ~/.bashrc  # or ~/.zshrc
