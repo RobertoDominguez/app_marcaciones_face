@@ -4,15 +4,15 @@ Flutter version
 3.38.7
 
 
-# Install fvm
+## Install fvm
 curl -fsSL https://fvm.app/install.sh | bash
 
 
-# For bash (add to ~/.bashrc):
+## For bash (add to ~/.bashrc):
 export PATH="/root/fvm/bin:$PATH"
 
-# Then restart your shell or run:
-source ~/.bashrc 
+## Then restart your shell or run:
+$ source ~/.bashrc 
 
 - fvm list
 - fvm install <version>
@@ -20,6 +20,8 @@ source ~/.bashrc
 - fvm flutter build web --base-href /app_marcaciones_face/build/web/
 
 
-# .htaccess
+## .htaccess
+
 RewriteEngine On
+
 RewriteRule ^$ /app/build/index.html [L]
