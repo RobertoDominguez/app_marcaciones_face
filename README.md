@@ -12,7 +12,7 @@ curl -fsSL https://fvm.app/install.sh | bash
 export PATH="/root/fvm/bin:$PATH"
 
 ## Then restart your shell or run:
-$ source ~/.bashrc 
+source ~/.bashrc 
 
 - fvm list
 - fvm install <version>
@@ -24,4 +24,4 @@ $ source ~/.bashrc
 
 RewriteEngine On
 
-RewriteRule ^$ /app/build/index.html [L]
+RewriteRule ^$ /app_marcaciones_face/build/web/index.html [L]
